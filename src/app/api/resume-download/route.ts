@@ -4,7 +4,27 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { NextResponse } from "next/server";
 
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+function isValidEmail(email: string) {
+  if (email.length > 254 || email.includes(" ")) {
+    return false;
+  }
+
+  const atIndex = email.indexOf("@");
+  const lastAtIndex = email.lastIndexOf("@");
+
+  if (atIndex <= 0 || atIndex !== lastAtIndex) {
+    return false;
+  }
+
+  const localPart = email.slice(0, atIndex);
+  const domain = email.slice(atIndex + 1);
+
+  if (!localPart || !domain || domain.startsWith(".") || domain.endsWith(".")) {
+    return false;
+  }
+
+  return domain.includes(".");
+}
 
 export async function POST(request: Request) {
   try {
@@ -20,7 +40,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Name and email are required." }, { status: 400 });
     }
 
-    if (!emailRegex.test(email)) {
+    if (!isValidEmail(email)) {
       return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
     }
 
@@ -64,7 +84,7 @@ export async function POST(request: Request) {
           sections: [
             { label: "Name", value: name },
             { label: "Email", value: email },
-            { label: "Event Time (UTC)", value: new Date().toISOString() },
+            { label: "Event Time (UTC)", value: new Date().toUTCString() },
           ],
           footer: "You can follow up by replying directly to this email.",
         }),

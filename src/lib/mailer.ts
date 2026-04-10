@@ -18,7 +18,13 @@ const MAIL_API_KEY = process.env.MAIL_API_KEY;
 const MAIL_FROM = process.env.MAIL_FROM;
 
 export function getOwnerEmail() {
-  return process.env.MAIL_TO ?? "kalpit677@gmail.com";
+  const ownerEmail = process.env.MAIL_TO;
+
+  if (!ownerEmail) {
+    throw new Error("Mailer is not configured. Set MAIL_TO.");
+  }
+
+  return ownerEmail;
 }
 
 export async function sendMail(input: MailInput) {

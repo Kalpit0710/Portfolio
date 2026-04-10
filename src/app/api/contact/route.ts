@@ -2,7 +2,27 @@ import { createThemedMail } from "@/lib/mail-template";
 import { getOwnerEmail, sendMail } from "@/lib/mailer";
 import { NextResponse } from "next/server";
 
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+function isValidEmail(email: string) {
+  if (email.length > 254 || email.includes(" ")) {
+    return false;
+  }
+
+  const atIndex = email.indexOf("@");
+  const lastAtIndex = email.lastIndexOf("@");
+
+  if (atIndex <= 0 || atIndex !== lastAtIndex) {
+    return false;
+  }
+
+  const localPart = email.slice(0, atIndex);
+  const domain = email.slice(atIndex + 1);
+
+  if (!localPart || !domain || domain.startsWith(".") || domain.endsWith(".")) {
+    return false;
+  }
+
+  return domain.includes(".");
+}
 
 export async function POST(request: Request) {
   try {
@@ -20,7 +40,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "All fields are required." }, { status: 400 });
     }
 
-    if (!emailRegex.test(email)) {
+    if (!isValidEmail(email)) {
       return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
     }
 
