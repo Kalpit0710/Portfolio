@@ -30,19 +30,19 @@ export async function POST(request: Request) {
     await Promise.all([
       sendMail({
         to: email,
-        subject: "Kalpit Agarwal Resume | Thanks for your interest",
+        subject: "Kalpit Agarwal Resume | Thanks for checking my work",
         html: createThemedMail({
-          title: "Resume Shared Successfully",
-          subtitle: "Thank you for your interest in my profile",
+          title: "Thanks for the interest",
+          subtitle: "I appreciate you taking a look at my profile",
           intro:
-            "I have attached my latest resume to this email. I would be glad to discuss full-time opportunities where I can contribute with full stack development experience in C#, .NET, React, and Azure DevOps.",
+            "Here is my latest resume attached. I focus on building reliable, recruiter-friendly experiences with C#, .NET, React, and Azure DevOps. If you are hiring for full-stack or frontend-heavy roles, I would love to share how I can help your team ship faster with clean, scalable UI and backend work.",
           sections: [
             { label: "Candidate", value: "Kalpit Agarwal" },
             { label: "Shared With", value: `${name} (${email})` },
             { label: "Attachment", value: RESUME_FILENAME },
           ],
           footer:
-            "If you would like to discuss a role, please reply to this email and I will respond promptly.",
+            "If there is an open role, feel free to reply with the job description or preferred next steps. I respond quickly.",
         }),
         attachments: [
           {
@@ -54,19 +54,19 @@ export async function POST(request: Request) {
       }),
       sendMail({
         to: getOwnerEmail(),
-        subject: `Resume downloaded by ${name}`,
+        subject: `Resume download: ${name} (${email})`,
         replyTo: email,
         html: createThemedMail({
-          title: "Resume Download Alert",
-          subtitle: "A visitor downloaded your resume",
+          title: "Resume request captured",
+          subtitle: "A recruiter just pulled your resume",
           intro:
-            "A new visitor submitted their details and downloaded your resume from the portfolio website.",
+            "A resume request was submitted from the portfolio site. Consider a short follow-up while the interest is fresh.",
           sections: [
             { label: "Name", value: name },
             { label: "Email", value: email },
             { label: "Event Time (UTC)", value: new Date().toUTCString() },
           ],
-          footer: "You can follow up by replying directly to this email.",
+          footer: "Tip: reply with a 2-3 line note and a role-fit summary to keep the conversation warm.",
         }),
       }),
     ]);

@@ -108,8 +108,8 @@ export default function Hero() {
         <Canvas camera={{ position: [0, 3, 10], fov: 50 }} dpr={[1, 2]}>
           <Scene />
         </Canvas>
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent pointer-events-none md:block hidden z-0" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent pointer-events-none z-0" />
+        <div className="absolute inset-0 bg-linear-to-r from-background via-background/80 to-transparent pointer-events-none md:block hidden z-0" />
+        <div className="absolute inset-0 bg-linear-to-t from-background via-background/60 to-transparent pointer-events-none z-0" />
       </div>
 
       {/* Hero Content */}
@@ -139,7 +139,7 @@ export default function Hero() {
             className="text-6xl md:text-8xl lg:text-[10rem] font-display font-extrabold text-white mb-6 leading-[0.9] tracking-tighter"
           >
             Kalpit <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-400 to-accent">Agarwal.</span>
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-primary via-blue-400 to-accent">Agarwal.</span>
           </motion.h1>
 
           <motion.p
@@ -183,9 +183,9 @@ export default function Hero() {
                 key={stat.title}
                 whileHover={{ y: -6, rotateX: -2, rotateY: 2, scale: 1.01 }}
                 transition={{ type: "spring", stiffness: 200, damping: 18 }}
-                className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-[1px]"
+                className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-px"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/15 via-transparent to-accent/15 opacity-80" />
+                <div className="absolute inset-0 bg-linear-to-r from-primary/15 via-transparent to-accent/15 opacity-80" />
                 <div className="relative h-full rounded-2xl bg-background/80 p-5 flex flex-col gap-2">
                   <span className="text-xs font-mono uppercase tracking-[0.2em] text-primary">0{idx + 1}</span>
                   <span className="text-xl text-white font-semibold">{stat.title}</span>
@@ -206,7 +206,7 @@ export default function Hero() {
         className="absolute bottom-10 left-6 md:left-auto md:right-10 flex items-center gap-4 text-gray-500 hover:text-white transition-colors group cursor-pointer z-20 pointer-events-auto"
       >
         <span className="text-sm font-mono uppercase tracking-widest rotate-90 origin-left translate-x-3">Scroll</span>
-        <div className="w-[1px] h-24 bg-gray-500/30 overflow-hidden ml-6">
+        <div className="w-px h-24 bg-gray-500/30 overflow-hidden ml-6">
           <motion.div
             animate={{ y: [0, 96, 96] }}
             transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}

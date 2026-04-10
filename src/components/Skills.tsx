@@ -43,9 +43,9 @@ export default function Skills() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             
             {/* Soft Skills Radar */}
-            <div className="bg-white/[0.02] rounded-3xl p-8 border border-white/10 hover:border-primary/50 transition-colors backdrop-blur-xl">
+            <div className="bg-white/2 rounded-3xl p-8 border border-white/10 hover:border-primary/50 transition-colors backdrop-blur-xl">
               <h3 className="text-xl font-bold text-white mb-8 tracking-wide">Soft Skills</h3>
-              <div className="h-[350px] w-full -ml-4">
+              <div className="h-87.5 w-full -ml-4">
                 <ResponsiveContainer width="100%" height="100%" minHeight={280} minWidth={0}>
                   <RadarChart cx="50%" cy="50%" outerRadius="70%" data={softSkillsData}>
                     <PolarGrid stroke="#ffffff" strokeOpacity={0.1} />
@@ -72,7 +72,7 @@ export default function Skills() {
 
             {/* Technical Skills Bars custom UI */}
             <div className="space-y-8">
-              <div className="bg-white/[0.02] rounded-3xl p-8 border border-white/10 hover:border-accent/50 transition-colors backdrop-blur-xl">
+              <div className="bg-white/2 rounded-3xl p-8 border border-white/10 hover:border-accent/50 transition-colors backdrop-blur-xl">
                 <h3 className="text-xl font-bold text-white mb-8 tracking-wide">Frameworks & Libraries</h3>
                 
                 <div className="space-y-6">
@@ -88,9 +88,9 @@ export default function Skills() {
                           whileInView={{ width: `${item.level}%` }}
                           viewport={{ once: true }}
                           transition={{ duration: 1, delay: i * 0.1, ease: "easeOut" }}
-                          className="h-full bg-gradient-to-r from-primary to-accent rounded-full relative"
+                          className="h-full bg-linear-to-r from-primary to-accent rounded-full relative"
                         >
-                          <div className="absolute right-0 top-0 h-full w-20 bg-gradient-to-r from-transparent to-white/50 blur-[2px]" />
+                          <div className="absolute right-0 top-0 h-full w-20 bg-linear-to-r from-transparent to-white/50 blur-[2px]" />
                         </motion.div>
                       </div>
                     </div>
@@ -100,8 +100,8 @@ export default function Skills() {
 
               {/* Smaller Tiles */}
               <div className="grid grid-cols-2 gap-6">
-                <div className="bg-white/[0.02] rounded-3xl p-6 border border-white/10 overflow-hidden relative group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="bg-white/2 rounded-3xl p-6 border border-white/10 overflow-hidden relative group">
+                  <div className="absolute inset-0 bg-linear-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">Languages</h3>
                   <div className="flex flex-wrap gap-2 relative z-10">
                     {languagesData.map(lang => (
@@ -111,8 +111,8 @@ export default function Skills() {
                     ))}
                   </div>
                 </div>
-                <div className="bg-white/[0.02] rounded-3xl p-6 border border-white/10 overflow-hidden relative group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="bg-white/2 rounded-3xl p-6 border border-white/10 overflow-hidden relative group">
+                  <div className="absolute inset-0 bg-linear-to-br from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">Tools</h3>
                   <div className="flex flex-wrap gap-2 relative z-10">
                     {toolsData.map(tool => (
