@@ -46,7 +46,7 @@ export default function Skills() {
             <div className="bg-white/[0.02] rounded-3xl p-8 border border-white/10 hover:border-primary/50 transition-colors backdrop-blur-xl">
               <h3 className="text-xl font-bold text-white mb-8 tracking-wide">Soft Skills</h3>
               <div className="h-[350px] w-full -ml-4">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" minHeight={280} minWidth={0}>
                   <RadarChart cx="50%" cy="50%" outerRadius="70%" data={softSkillsData}>
                     <PolarGrid stroke="#ffffff" strokeOpacity={0.1} />
                     <PolarAngleAxis dataKey="subject" tick={{ fill: '#9ca3af', fontSize: 13, fontWeight: 500 }} />
