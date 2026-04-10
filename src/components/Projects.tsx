@@ -1,12 +1,22 @@
 "use client";
 
+import { MouseEvent } from "react";
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 
-const projects = [
+type Project = {
+  title: string;
+  date: string;
+  tech: string[];
+  features: string[];
+  badge?: string;
+};
+
+const projects: Project[] = [
   {
     title: "School Fee Management System",
     date: "March 2025 - April 2025",
     tech: ["Laravel", "MySQL"],
+    badge: "Enterprise ready",
     features: [
       "Engineered online fee payments system.",
       "Integrated comprehensive admin panel.",
@@ -35,7 +45,7 @@ const projects = [
   },
 ];
 
-function ProjectCard({ project, index }: { project: any; index: number }) {
+function ProjectCard({ project, index }: { project: Project; index: number }) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -45,7 +55,7 @@ function ProjectCard({ project, index }: { project: any; index: number }) {
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["15deg", "-15deg"]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-15deg", "15deg"]);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -78,13 +88,24 @@ function ProjectCard({ project, index }: { project: any; index: number }) {
           rotateY,
           transformStyle: "preserve-3d",
         }}
-        className="h-full bg-gradient-to-br from-white/10 to-white/5 border border-white/10 rounded-3xl p-8 cursor-pointer group"
+        className="group h-full overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-8 cursor-pointer relative"
       >
-        <div style={{ transform: "translateZ(50px)" }}>
-          <span className="text-primary text-sm font-medium tracking-widest uppercase mb-4 block">
-            {project.date}
-          </span>
-          <h3 className="text-2xl font-bold font-display text-white mb-6 group-hover:text-primary transition-colors">
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <div className="absolute -inset-16 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.35),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(45,212,191,0.3),transparent_35%)] blur-3xl" />
+        </div>
+
+        <div className="relative space-y-4" style={{ transform: "translateZ(50px)" }}>
+          <div className="flex items-center justify-between">
+            <span className="text-primary text-sm font-medium tracking-widest uppercase">
+              {project.date}
+            </span>
+            {project.badge && (
+              <span className="text-[10px] uppercase tracking-[0.2em] text-accent bg-accent/10 px-3 py-1 rounded-full border border-accent/30">
+                {project.badge}
+              </span>
+            )}
+          </div>
+          <h3 className="text-2xl font-bold font-display text-white group-hover:text-primary transition-colors">
             {project.title}
           </h3>
           
@@ -99,12 +120,16 @@ function ProjectCard({ project, index }: { project: any; index: number }) {
         </div>
         
         <div 
-          className="mt-auto flex flex-wrap gap-2 pt-6 border-t border-white/10"
+          className="relative mt-auto flex flex-wrap gap-2 pt-6 border-t border-white/10"
           style={{ transform: "translateZ(30px)" }}
         >
-          {project.tech.map((t: string) => (
-            <span key={t} className="text-xs font-medium text-accent bg-accent/10 px-3 py-1 rounded-full">
-              {t}
+          <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-60" />
+          {project.tech.map((tech) => (
+            <span
+              key={tech}
+              className="text-xs font-medium text-accent bg-white/10 px-3 py-1 rounded-full border border-white/10 backdrop-blur-sm"
+            >
+              {tech}
             </span>
           ))}
         </div>
