@@ -1,4 +1,5 @@
 import { createThemedMail } from "@/lib/mail-template";
+import { RESUME_FILENAME } from "@/lib/constants";
 import { getOwnerEmail, sendMail } from "@/lib/mailer";
 import { isValidEmail } from "@/lib/validation";
 import { readFile } from "node:fs/promises";
@@ -38,14 +39,14 @@ export async function POST(request: Request) {
           sections: [
             { label: "Candidate", value: "Kalpit Agarwal" },
             { label: "Shared With", value: `${name} (${email})` },
-            { label: "Attachment", value: "Kalpit-Agarwal-Resume.pdf" },
+            { label: "Attachment", value: RESUME_FILENAME },
           ],
           footer:
             "If you would like to discuss a role, please reply to this email and I will respond promptly.",
         }),
         attachments: [
           {
-            filename: "Kalpit-Agarwal-Resume.pdf",
+            filename: RESUME_FILENAME,
             content: encodedResume,
             content_type: "application/pdf",
           },

@@ -4,8 +4,9 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { RESUME_FILENAME } from "@/lib/constants";
 
-const RESUME_MODAL_CLOSE_DELAY_MS = 800;
+const RESUME_SUCCESS_MODAL_AUTO_CLOSE_DELAY_MS = 800;
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -46,7 +47,7 @@ export default function Navbar() {
   const triggerResumeDownload = () => {
     const link = document.createElement("a");
     link.href = "/resume.pdf";
-    link.download = "Kalpit-Agarwal-Resume.pdf";
+    link.download = RESUME_FILENAME;
     document.body.append(link);
     link.click();
     link.remove();
@@ -77,7 +78,7 @@ export default function Navbar() {
 
       triggerResumeDownload();
       setResumeForm({ name: "", email: "" });
-      setTimeout(closeResumeModal, RESUME_MODAL_CLOSE_DELAY_MS);
+      setTimeout(closeResumeModal, RESUME_SUCCESS_MODAL_AUTO_CLOSE_DELAY_MS);
     } catch (error) {
       setResumeStatus({
         type: "error",

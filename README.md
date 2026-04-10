@@ -23,7 +23,7 @@ To enable dynamic email notifications for contact form submissions and resume do
 ```bash
 MAIL_API_KEY=your_resend_api_key
 MAIL_FROM="Kalpit Portfolio <noreply@yourdomain.com>"
-MAIL_TO=kalpit677@gmail.com
+MAIL_TO=your-email@example.com
 MAIL_API_URL=https://api.resend.com/emails
 ```
 

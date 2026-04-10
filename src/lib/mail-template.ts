@@ -1,3 +1,5 @@
+import { PORTFOLIO_BRAND_NAME } from "@/lib/constants";
+
 type MailSection = {
   label: string;
   value: string;
@@ -46,7 +48,7 @@ export function createThemedMail({
           <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:620px;background:linear-gradient(160deg,#0f172a 0%,#111827 100%);border:1px solid #1f2937;border-radius:20px;overflow:hidden;">
             <tr>
               <td style="padding:24px 28px;background:linear-gradient(90deg,rgba(59,130,246,0.25),rgba(59,130,246,0.08));border-bottom:1px solid #1f2937;">
-                <p style="margin:0;color:#60a5fa;font-weight:600;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;">Kalpit Portfolio</p>
+                <p style="margin:0;color:#60a5fa;font-weight:600;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;">${escapeHtml(PORTFOLIO_BRAND_NAME)}</p>
                 <h1 style="margin:10px 0 4px;color:#ffffff;font-size:24px;line-height:1.3;">${escapeHtml(title)}</h1>
                 <p style="margin:0;color:#cbd5e1;font-size:14px;">${escapeHtml(subtitle)}</p>
               </td>
