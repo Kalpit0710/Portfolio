@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
+const RESUME_MODAL_CLOSE_DELAY_MS = 800;
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -75,7 +77,7 @@ export default function Navbar() {
 
       triggerResumeDownload();
       setResumeForm({ name: "", email: "" });
-      setTimeout(closeResumeModal, 800);
+      setTimeout(closeResumeModal, RESUME_MODAL_CLOSE_DELAY_MS);
     } catch (error) {
       setResumeStatus({
         type: "error",

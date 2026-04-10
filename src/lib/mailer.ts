@@ -53,4 +53,10 @@ export async function sendMail(input: MailInput) {
     const errorText = await response.text();
     throw new Error(`Mail API request failed: ${response.status} ${errorText}`);
   }
+
+  if (response.status === 204) {
+    return null;
+  }
+
+  return response.json();
 }
