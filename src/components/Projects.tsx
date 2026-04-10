@@ -88,7 +88,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           rotateY,
           transformStyle: "preserve-3d",
         }}
-        className="group h-full overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-8 cursor-pointer relative"
+        className="group h-full overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-white/10 to-white/5 p-8 cursor-pointer relative"
       >
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
           <div className="absolute -inset-16 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.35),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(45,212,191,0.3),transparent_35%)] blur-3xl" />
@@ -123,7 +123,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           className="relative mt-auto flex flex-wrap gap-2 pt-6 border-t border-white/10"
           style={{ transform: "translateZ(30px)" }}
         >
-          <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-60" />
+          <div className="absolute inset-x-0 -top-px h-px bg-linear-to-r from-transparent via-primary/50 to-transparent opacity-60" />
           {project.tech.map((tech) => (
             <span
               key={tech}

@@ -34,7 +34,7 @@ export default function Experiences() {
 
           <div className="relative border-l-2 border-primary/30 pl-8 md:pl-0 md:border-none space-y-12">
             {/* Desktop Center Line */}
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[2px] bg-primary/20 -translate-x-1/2"></div>
+            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-primary/20 -translate-x-1/2"></div>
             
             {experiences.map((exp, index) => (
               <div 
