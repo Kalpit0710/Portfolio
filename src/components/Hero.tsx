@@ -99,7 +99,10 @@ export default function Hero() {
   ];
 
   return (
-    <section id="hero" className="sticky top-0 h-screen w-full overflow-hidden flex items-center z-0">
+    <section
+      id="hero"
+      className="relative min-h-screen w-full overflow-hidden flex items-center z-0 pt-24 pb-16"
+    >
       {/* 3D Background */}
       <div className="absolute inset-0 w-full h-full pointer-events-auto">
         <Canvas camera={{ position: [0, 3, 10], fov: 50 }} dpr={[1, 2]}>
