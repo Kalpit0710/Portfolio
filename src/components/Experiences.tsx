@@ -32,7 +32,7 @@ export default function Experiences() {
             <span className="text-primary text-2xl">03.</span> Experience
           </h2>
 
-          <div className="relative border-l-2 border-primary/30 pl-8 ml-4 md:ml-0 md:pl-0 md:border-none space-y-12">
+          <div className="relative border-l-2 border-primary/30 pl-8 md:pl-0 md:border-none space-y-12">
             {/* Desktop Center Line */}
             <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[2px] bg-primary/20 -translate-x-1/2"></div>
             
@@ -44,7 +44,7 @@ export default function Experiences() {
                 }`}
               >
                 {/* Timeline Dot */}
-                <div className="absolute -left-[41px] md:left-1/2 md:-translate-x-1/2 top-1.5 w-5 h-5 rounded-full bg-background border-4 border-primary z-10 shadow-[0_0_15px_rgba(59,130,246,0.5)]"></div>
+                <div className="absolute -left-3 md:left-1/2 md:-translate-x-1/2 top-1.5 w-5 h-5 rounded-full bg-background border-4 border-primary z-10 shadow-[0_0_15px_rgba(59,130,246,0.5)]"></div>
                 
                 {/* Content Box */}
                 <div className={`md:w-1/2 md:px-12 ${index % 2 === 0 ? "md:pl-12" : "md:pr-12"} mb-8 md:mb-0`}>
