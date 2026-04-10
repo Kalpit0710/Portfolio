@@ -25,10 +25,10 @@ export default function Contact() {
             {/* Contact Info */}
             <div>
               <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-                Let's Work <span className="text-primary italic">Together</span>
+                Let&apos;s Work <span className="text-primary italic">Together</span>
               </h2>
               <p className="text-gray-400 mb-12 text-lg">
-                I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+                I&apos;m currently looking for new opportunities. Whether you have a question or just want to say hi, I&apos;ll try my best to get back to you!
               </p>
               
               <div className="space-y-6 mb-12">

@@ -43,6 +43,32 @@ function InteractiveLiquidBlob() {
   );
 }
 
+function OrbitRing({ radius, color, speed, tilt }: { radius: number; color: string; speed: number; tilt: number }) {
+  const ringRef = useRef<THREE.Mesh>(null);
+
+  useFrame((state, delta) => {
+    if (ringRef.current) {
+      ringRef.current.rotation.z += delta * speed;
+      ringRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.25) * 0.2 + tilt;
+    }
+  });
+
+  return (
+    <mesh ref={ringRef} rotation={[Math.PI / 2 + tilt, 0, 0]}>
+      <torusGeometry args={[radius, 0.06, 32, 320]} />
+      <meshStandardMaterial
+        color={color}
+        emissive={color}
+        emissiveIntensity={0.45}
+        transparent
+        opacity={0.65}
+        roughness={0.2}
+        metalness={0.4}
+      />
+    </mesh>
+  );
+}
+
 function Scene() {
   return (
     <>
@@ -51,6 +77,12 @@ function Scene() {
       <directionalLight position={[-10, 10, -5]} intensity={2} color="#2dd4bf" />
       <pointLight position={[0, 0, 5]} intensity={1} color="#ffffff" />
       
+      <group position={[0, 0.5, 0]}>
+        <OrbitRing radius={2.4} color="#3b82f6" speed={0.35} tilt={0.25} />
+        <OrbitRing radius={1.7} color="#2dd4bf" speed={-0.25} tilt={-0.15} />
+        <OrbitRing radius={1.1} color="#38bdf8" speed={0.45} tilt={0.05} />
+      </group>
+
       <InteractiveLiquidBlob />
       
       <Sparkles count={100} scale={15} size={2} speed={0.4} opacity={0.3} color="#3b82f6" />
@@ -60,8 +92,17 @@ function Scene() {
 }
 
 export default function Hero() {
+  const highlightStats = [
+    { title: "7+ Projects", detail: "Full stack builds and data stories" },
+    { title: "3D & Motion", detail: "R3F, Drei, and cinematic UI" },
+    { title: "Production Ready", detail: "Azure DevOps, clean releases" },
+  ];
+
   return (
-    <section id="hero" className="sticky top-0 h-screen w-full overflow-hidden flex items-center z-0">
+    <section
+      id="hero"
+      className="relative min-h-screen w-full overflow-hidden flex items-center z-0 pt-16 md:pt-20 pb-16"
+    >
       {/* 3D Background */}
       <div className="absolute inset-0 w-full h-full pointer-events-auto">
         <Canvas camera={{ position: [0, 3, 10], fov: 50 }} dpr={[1, 2]}>
@@ -73,6 +114,8 @@ export default function Hero() {
 
       {/* Hero Content */}
       <div className="relative z-10 w-full px-6 container mx-auto max-w-7xl pointer-events-none">
+        <div className="absolute -top-10 -right-32 h-60 w-60 bg-primary/20 blur-[120px] rounded-full opacity-70" />
+        <div className="absolute bottom-10 -left-20 h-48 w-48 bg-accent/30 blur-[120px] rounded-full opacity-80" />
         <div className="max-w-4xl pt-20 pointer-events-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -127,6 +170,29 @@ export default function Hero() {
             >
               Contact Me
             </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 0.8, ease: "easeOut" }}
+            className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
+          >
+            {highlightStats.map((stat, idx) => (
+              <motion.div
+                key={stat.title}
+                whileHover={{ y: -6, rotateX: -2, rotateY: 2, scale: 1.01 }}
+                transition={{ type: "spring", stiffness: 200, damping: 18 }}
+                className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-[1px]"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/15 via-transparent to-accent/15 opacity-80" />
+                <div className="relative h-full rounded-2xl bg-background/80 p-5 flex flex-col gap-2">
+                  <span className="text-xs font-mono uppercase tracking-[0.2em] text-primary">0{idx + 1}</span>
+                  <span className="text-xl text-white font-semibold">{stat.title}</span>
+                  <span className="text-sm text-gray-400 leading-relaxed">{stat.detail}</span>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </div>
