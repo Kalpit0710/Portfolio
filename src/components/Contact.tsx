@@ -3,11 +3,45 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, Send } from "lucide-react";
 import { FaGithub as Github, FaLinkedin as Linkedin } from "react-icons/fa";
+import { useState } from "react";
 
 export default function Contact() {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("This is a demo form. Please use the email provided to contact me.");
+    setIsSubmitting(true);
+    setStatus(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const payload = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        throw new Error(payload.error ?? "Failed to send message.");
+      }
+
+      setStatus({
+        type: "success",
+        message: "Message sent successfully. Please check your email for confirmation.",
+      });
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message:
+          error instanceof Error ? error.message : "Unable to send your message right now.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -86,6 +120,13 @@ export default function Contact() {
                   <input 
                     type="text" 
                     id="name"
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        name: e.target.value,
+                      }))
+                    }
                     required
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors hover:border-white/20"
                   />
@@ -96,6 +137,13 @@ export default function Contact() {
                   <input 
                     type="email" 
                     id="email"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        email: e.target.value,
+                      }))
+                    }
                     required
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors hover:border-white/20"
                   />
@@ -105,18 +153,36 @@ export default function Contact() {
                   <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2">Message</label>
                   <textarea 
                     id="message"
+                    value={formData.message}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        message: e.target.value,
+                      }))
+                    }
                     rows={4}
                     required
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors resize-none hover:border-white/20"
                   ></textarea>
                 </div>
+
+                {status && (
+                  <p
+                    className={`text-sm ${
+                      status.type === "success" ? "text-emerald-400" : "text-red-400"
+                    }`}
+                  >
+                    {status.message}
+                  </p>
+                )}
                 
                 <button 
                   type="submit"
+                  disabled={isSubmitting}
                   className="w-full py-4 bg-primary text-white font-medium rounded-xl hover:bg-blue-600 transition-colors flex items-center justify-center gap-2 transform active:scale-95 duration-200 shadow-[0_0_20px_rgba(59,130,246,0.5)]"
                 >
                   <Send className="w-5 h-5" />
-                  Send Message
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </button>
               </div>
             </motion.form>

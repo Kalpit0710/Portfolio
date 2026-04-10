@@ -16,6 +16,20 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Mailer Configuration
+
+To enable dynamic email notifications for contact form submissions and resume downloads, set these environment variables:
+
+```bash
+MAIL_API_KEY=your_resend_api_key
+MAIL_FROM="Kalpit Portfolio <noreply@yourdomain.com>"
+MAIL_TO=kalpit677@gmail.com
+MAIL_API_URL=https://api.resend.com/emails
+```
+
+- `MAIL_TO` is the inbox that receives owner notifications.
+- `MAIL_API_URL` defaults to Resend and can be overridden for a compatible provider.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
