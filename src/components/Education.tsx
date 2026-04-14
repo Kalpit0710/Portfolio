@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { GraduationCap } from "lucide-react";
 
 export default function Education() {
@@ -31,25 +28,15 @@ export default function Education() {
   return (
     <section id="education" className="py-24 bg-background relative z-10 border-t border-white/5">
       <div className="container mx-auto px-6 max-w-7xl">
-        <motion.div
-          className="max-w-4xl"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-        >
+        <div className="max-w-4xl">
           <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-16 flex items-center gap-4">
             <span className="text-primary text-2xl">07.</span> Education
           </h2>
 
           <div className="space-y-8">
             {education.map((edu, i) => (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="flex gap-6 group"
               >
                 <div className="flex flex-col items-center">
@@ -67,10 +54,10 @@ export default function Education() {
                   <h4 className="text-lg text-gray-300 font-medium mb-3">{edu.institution}, {edu.location}</h4>
                   <p className="text-gray-400 font-mono bg-white/5 inline-block px-3 py-1 rounded border border-white/10">{edu.score}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

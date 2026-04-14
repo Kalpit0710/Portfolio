@@ -1,18 +1,8 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 export default function About() {
   return (
     <section id="about" className="py-24 bg-background relative z-10">
       <div className="container mx-auto px-6 max-w-7xl">
-        <motion.div
-          className="max-w-4xl"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-        >
+        <div className="max-w-4xl">
           <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-12 flex items-center gap-4">
             <span className="text-primary text-2xl">01.</span> About Me
           </h2>
@@ -35,7 +25,7 @@ export default function About() {
               </p>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

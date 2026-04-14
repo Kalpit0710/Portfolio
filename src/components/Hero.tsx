@@ -172,6 +172,14 @@ export default function Hero() {
             </a>
           </motion.div>
 
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent("resume:open"))}
+            className="mt-5 w-full sm:hidden px-8 py-4 rounded-full bg-primary text-white font-semibold text-lg hover:bg-blue-600 transition-colors"
+          >
+            Download Resume
+          </button>
+
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
@@ -203,7 +211,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-10 left-6 md:left-auto md:right-10 flex items-center gap-4 text-gray-500 hover:text-white transition-colors group cursor-pointer z-20 pointer-events-auto"
+        className="absolute bottom-10 left-6 md:left-auto md:right-10 hidden md:flex items-center gap-4 text-gray-500 hover:text-white transition-colors group cursor-pointer z-20 pointer-events-auto"
       >
         <span className="text-sm font-mono uppercase tracking-widest rotate-90 origin-left translate-x-3">Scroll</span>
         <div className="w-px h-24 bg-gray-500/30 overflow-hidden ml-6">

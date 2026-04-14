@@ -4,11 +4,12 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Kalpit Agarwal Portfolio",
     short_name: "Kalpit",
-    description: "Full Stack Developer portfolio with enterprise-ready projects.",
+    description:
+      "Full Stack Developer at MAQ Software specializing in C# .NET, React, and Azure DevOps.",
     start_url: "/",
     display: "standalone",
-    background_color: "#0b0f1a",
-    theme_color: "#0b0f1a",
+    background_color: "#050505",
+    theme_color: "#050505",
     icons: [
       {
         src: "/file.svg",

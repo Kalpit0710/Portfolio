@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 const experiences = [
   {
     role: "Associate Software Engineer",
@@ -21,13 +17,7 @@ export default function Experiences() {
   return (
     <section id="experience" className="py-24 bg-background relative z-10 border-t border-white/5">
       <div className="container mx-auto px-6 max-w-7xl">
-        <motion.div
-          className="max-w-5xl"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-        >
+        <div className="max-w-5xl">
           <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-16 flex items-center gap-4">
             <span className="text-primary text-2xl">03.</span> Experience
           </h2>
@@ -48,25 +38,19 @@ export default function Experiences() {
                 
                 {/* Content Box */}
                 <div className={`md:w-1/2 md:px-12 ${index % 2 === 0 ? "md:pl-12" : "md:pr-12"} mb-8 md:mb-0`}>
-                  <motion.div
-                    initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="bg-white/5 border border-white/10 p-8 rounded-3xl hover:-translate-y-2 transition-transform duration-300 shadow-xl"
-                  >
+                  <div className="bg-white/5 border border-white/10 p-8 rounded-3xl hover:-translate-y-2 transition-transform duration-300 shadow-xl">
                     <span className="text-primary font-medium tracking-wider text-sm block mb-2">{exp.timeline}</span>
                     <h3 className="text-2xl font-bold text-white mb-1">{exp.role}</h3>
                     <h4 className="text-lg text-gray-400 mb-6 font-medium">{exp.company}</h4>
                     <p className="text-gray-400 leading-relaxed text-sm md:text-base">
                       {exp.description}
                     </p>
-                  </motion.div>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

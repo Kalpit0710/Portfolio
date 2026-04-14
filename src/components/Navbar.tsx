@@ -26,6 +26,16 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleResumeOpen = () => {
+      setMobileMenuOpen(false);
+      openResumeModal();
+    };
+
+    window.addEventListener("resume:open", handleResumeOpen);
+    return () => window.removeEventListener("resume:open", handleResumeOpen);
+  }, []);
+
   const navLinks = [
     { name: "About", href: "#about" },
     { name: "Skills", href: "#skills" },
@@ -156,19 +166,6 @@ export default function Navbar() {
                   </Link>
                 </motion.div>
               ))}
-              <motion.button
-                type="button"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: navLinks.length * 0.1 }}
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  openResumeModal();
-                }}
-                className="mt-4 px-8 py-3 rounded-full bg-primary text-white text-lg font-medium"
-              >
-                Download Resume
-              </motion.button>
             </motion.div>
           )}
         </AnimatePresence>
