@@ -93,7 +93,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/file.svg", type: "image/svg+xml" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
     ],
   },
   category: "technology",
