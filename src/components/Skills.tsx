@@ -107,7 +107,16 @@ export default function Skills() {
                       <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
                       <Tooltip
                         cursor={{ stroke: '#3b82f6', strokeOpacity: 0.3 }}
-                        formatter={(value: number | string) => [`${value}%`, 'Score']}
+                        formatter={(
+                          value:
+                            | number
+                            | string
+                            | readonly (number | string)[]
+                            | undefined
+                        ) => {
+                          const displayValue = Array.isArray(value) ? value[0] : value;
+                          return [displayValue == null ? "--" : `${displayValue}%`, "Score"];
+                        }}
                         contentStyle={{
                           background: 'rgba(15, 23, 42, 0.9)',
                           border: '1px solid rgba(59, 130, 246, 0.4)',
