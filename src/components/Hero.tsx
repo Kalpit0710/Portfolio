@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Sparkles, Float, MeshDistortMaterial, Sphere } from "@react-three/drei";
 import { motion } from "framer-motion";
@@ -8,8 +8,68 @@ import * as THREE from "three";
 
 function InteractiveLiquidBlob() {
   const meshRef = useRef<THREE.Mesh>(null);
+  const gyroRef = useRef({ x: 0, y: 0, hasData: false, enabled: false });
   // Persistent vector to avoid garbage collection leaks
   const targetPos = new THREE.Vector3(0, 0, 0);
+
+  useEffect(() => {
+    let mounted = true;
+
+    const onOrientation = (event: DeviceOrientationEvent) => {
+      if (!gyroRef.current.enabled) return;
+      const { beta, gamma } = event;
+      if (beta == null || gamma == null) return;
+
+      const normalizedX = THREE.MathUtils.clamp(gamma / 45, -1, 1);
+      const normalizedY = THREE.MathUtils.clamp(-beta / 45, -1, 1);
+      gyroRef.current.x = normalizedX;
+      gyroRef.current.y = normalizedY;
+      gyroRef.current.hasData = true;
+    };
+
+    const enableGyro = async () => {
+      if (!mounted || gyroRef.current.enabled) return;
+      if (typeof DeviceOrientationEvent === "undefined") return;
+      let granted = true;
+
+      const maybeRequestPermission = (DeviceOrientationEvent as typeof DeviceOrientationEvent & {
+        requestPermission?: () => Promise<"granted" | "denied">;
+      }).requestPermission;
+
+      if (typeof maybeRequestPermission === "function") {
+        try {
+          const result = await maybeRequestPermission();
+          granted = result === "granted";
+        } catch {
+          granted = false;
+        }
+      }
+
+      if (!granted) return;
+      gyroRef.current.enabled = true;
+      window.addEventListener("deviceorientation", onOrientation);
+    };
+
+    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice) {
+      const onFirstTouch = () => {
+        void enableGyro();
+      };
+      window.addEventListener("touchstart", onFirstTouch, { once: true });
+
+      return () => {
+        mounted = false;
+        window.removeEventListener("touchstart", onFirstTouch);
+        window.removeEventListener("deviceorientation", onOrientation);
+      };
+    }
+
+    void enableGyro();
+    return () => {
+      mounted = false;
+      window.removeEventListener("deviceorientation", onOrientation);
+    };
+  }, []);
 
   useFrame((state, delta) => {
     if (meshRef.current) {
@@ -17,8 +77,10 @@ function InteractiveLiquidBlob() {
       meshRef.current.rotation.x += delta * 0.1;
       meshRef.current.rotation.y += delta * 0.15;
       
-      // Smoothly map mouse to screen positions
-      targetPos.set(state.pointer.x * 2.5, state.pointer.y * 2.5, 0);
+      // Prefer gyro on touch devices, fall back to pointer input
+      const inputX = gyroRef.current.enabled && gyroRef.current.hasData ? gyroRef.current.x : state.pointer.x;
+      const inputY = gyroRef.current.enabled && gyroRef.current.hasData ? gyroRef.current.y : state.pointer.y;
+      targetPos.set(inputX * 2.5, inputY * 2.5, 0);
       
       // ultra-smooth easing via lerp gives a lag-free, "flowy" liquid feel
       meshRef.current.position.lerp(targetPos, 0.05);
