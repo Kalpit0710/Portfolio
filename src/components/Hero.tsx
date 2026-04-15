@@ -9,6 +9,7 @@ import * as THREE from "three";
 function InteractiveLiquidBlob() {
   const meshRef = useRef<THREE.Mesh>(null);
   const gyroRef = useRef({ x: 0, y: 0, hasData: false, enabled: false });
+  const isTouchDeviceRef = useRef(false);
   // Persistent vector to avoid garbage collection leaks
   const targetPos = new THREE.Vector3(0, 0, 0);
 
@@ -51,6 +52,7 @@ function InteractiveLiquidBlob() {
     };
 
     const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    isTouchDeviceRef.current = isTouchDevice;
     if (isTouchDevice) {
       const onFirstTouch = () => {
         void enableGyro();
@@ -77,9 +79,11 @@ function InteractiveLiquidBlob() {
       meshRef.current.rotation.x += delta * 0.1;
       meshRef.current.rotation.y += delta * 0.15;
       
-      // Prefer gyro on touch devices, fall back to pointer input
-      const inputX = gyroRef.current.enabled && gyroRef.current.hasData ? gyroRef.current.x : state.pointer.x;
-      const inputY = gyroRef.current.enabled && gyroRef.current.hasData ? gyroRef.current.y : state.pointer.y;
+      // On touch devices: only gyro drives motion; on desktop: pointer drives motion
+      const useGyroOnly = isTouchDeviceRef.current;
+      const hasGyro = gyroRef.current.enabled && gyroRef.current.hasData;
+      const inputX = useGyroOnly ? (hasGyro ? gyroRef.current.x : 0) : state.pointer.x;
+      const inputY = useGyroOnly ? (hasGyro ? gyroRef.current.y : 0) : state.pointer.y;
       targetPos.set(inputX * 2.5, inputY * 2.5, 0);
       
       // ultra-smooth easing via lerp gives a lag-free, "flowy" liquid feel
