@@ -28,8 +28,6 @@ const frameworksData = [
 
 const languagesData = ["C#", "C++", "Java", "PHP", "JavaScript", "SQL"];
 const toolsData = [
-  "MongoDB",
-  "MySQL",
   "Azure Portal",
   "Azure DevOps",
   "Power BI",
@@ -99,7 +97,7 @@ export default function Skills() {
               {/* Soft Skills Radar */}
               <div className="bg-white/2 rounded-3xl p-8 border border-white/10 hover:border-primary/50 transition-colors backdrop-blur-xl">
                 <h3 className="text-xl font-bold text-white mb-8 tracking-wide">Soft Skills</h3>
-                <div className="h-87.5 w-full -ml-4">
+                <div className="h-[350px] w-full -ml-4">
                   <ResponsiveContainer width="100%" height="100%" minHeight={280} minWidth={0}>
                     <RadarChart cx="50%" cy="50%" outerRadius="70%" data={softSkillsData}>
                       <PolarGrid stroke="#ffffff" strokeOpacity={0.1} />

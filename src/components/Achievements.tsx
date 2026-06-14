@@ -31,7 +31,7 @@ export default function Achievements() {
             {achievements.map((item, i) => (
               <div
                 key={i}
-                className="bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-primary/50 transition-colors text-center flex flex-col items-center"
+                className="bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-primary/50 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 text-center flex flex-col items-center"
               >
                 <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mb-6">
                   {item.icon}

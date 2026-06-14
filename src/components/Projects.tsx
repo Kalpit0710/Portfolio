@@ -3,15 +3,32 @@
 import { MouseEvent } from "react";
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+
 type Project = {
   title: string;
   date: string;
   tech: string[];
   features: string[];
   badge?: string;
+  githubUrl?: string;
+  liveUrl?: string;
 };
 
 const projects: Project[] = [
+  {
+    title: "Personal Portfolio",
+    date: "February 2024 - Present",
+    tech: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "Three.js"],
+    badge: "Creative",
+    features: [
+      "Built a highly interactive 3D developer portfolio.",
+      "Implemented clean code, creative solutions, and modern UI/UX.",
+      "Integrated Framer Motion for smooth animations and transitions.",
+    ],
+    githubUrl: "https://github.com/Kalpit0710/My_Portfolio",
+    liveUrl: "https://my-portfolio-two-ebon-19.vercel.app",
+  },
   {
     title: "School Fee Management System",
     date: "March 2025 - April 2025",
@@ -22,6 +39,7 @@ const projects: Project[] = [
       "Integrated comprehensive admin panel.",
       "Implemented automated fee calculation and receipt generation.",
     ],
+    githubUrl: "https://github.com/Kalpit0710/fee-manage",
   },
   {
     title: "Website for School",
@@ -32,6 +50,8 @@ const projects: Project[] = [
       "Implemented front-end and back-end for seamless experience.",
       "Integrated contact forms with validation.",
     ],
+    githubUrl: "https://github.com/Kalpit0710/School",
+    liveUrl: "https://jrpschool.netlify.app/",
   },
   {
     title: "Student Result Management System",
@@ -42,6 +62,7 @@ const projects: Project[] = [
       "Developed system to streamline result entry and publication.",
       "Incorporated role-based access for data privacy.",
     ],
+    githubUrl: "https://github.com/Kalpit0710/Student-Result-Management-System",
   },
 ];
 
@@ -124,14 +145,40 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           style={{ transform: "translateZ(30px)" }}
         >
           <div className="absolute inset-x-0 -top-px h-px bg-linear-to-r from-transparent via-primary/50 to-transparent opacity-60" />
-          {project.tech.map((tech) => (
-            <span
-              key={tech}
-              className="text-xs font-medium text-accent bg-white/10 px-3 py-1 rounded-full border border-white/10 backdrop-blur-sm"
-            >
-              {tech}
-            </span>
-          ))}
+          <div className="flex-1 flex flex-wrap gap-2">
+            {project.tech.map((tech) => (
+              <span
+                key={tech}
+                className="text-xs font-medium text-accent bg-white/10 px-3 py-1 rounded-full border border-white/10 backdrop-blur-sm"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+          <div className="flex items-center gap-3 ml-auto">
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors"
+                aria-label="GitHub Repository"
+              >
+                <FaGithub size={20} />
+              </a>
+            )}
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-primary transition-colors"
+                aria-label="Live Demo"
+              >
+                <FaExternalLinkAlt size={18} />
+              </a>
+            )}
+          </div>
         </div>
       </motion.div>
     </motion.div>
@@ -143,7 +190,7 @@ export default function Projects() {
     <section id="projects" className="py-24 bg-background relative z-10 border-t border-white/5">
       <div className="container mx-auto px-6 max-w-7xl">
         <motion.div
-          className="max-w-6xl"
+          className="w-full"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}

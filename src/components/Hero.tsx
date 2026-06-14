@@ -95,7 +95,7 @@ function InteractiveLiquidBlob() {
     <Float speed={2} rotationIntensity={0.8} floatIntensity={1.5}>
       <Sphere ref={meshRef} visible args={[1, 128, 128]} scale={2.6}>
         <MeshDistortMaterial
-          color="#0f172a"
+          color="#1e3a5f"
           attach="material"
           distort={0.4} // High distortion for liquid effect
           speed={1.5}   // Fluid animation speed
@@ -182,7 +182,7 @@ export default function Hero() {
       <div className="relative z-10 w-full px-6 container mx-auto max-w-7xl pointer-events-none">
         <div className="absolute -top-10 -right-32 h-60 w-60 bg-primary/20 blur-[120px] rounded-full opacity-70" />
         <div className="absolute bottom-10 -left-20 h-48 w-48 bg-accent/30 blur-[120px] rounded-full opacity-80" />
-        <div className="max-w-4xl pt-20 pointer-events-auto">
+        <div className="max-w-4xl pointer-events-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -212,7 +212,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="text-xl md:text-3xl text-gray-400 max-w-2xl mb-12 font-light leading-relaxed font-sans"
+            className="text-xl md:text-3xl text-gray-300 max-w-2xl mb-12 font-light leading-relaxed font-sans"
           >
             Elevating digital experiences. <strong className="text-white font-medium">Full Stack Developer</strong> & UX Enthusiast engineering premium web interfaces.
           </motion.p>

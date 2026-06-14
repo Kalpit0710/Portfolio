@@ -11,6 +11,7 @@ const RESUME_SUCCESS_MODAL_AUTO_CLOSE_DELAY_MS = 800;
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
   const [resumeForm, setResumeForm] = useState({ name: "", email: "" });
   const [isRequestingResume, setIsRequestingResume] = useState(false);
@@ -23,7 +24,28 @@ export default function Navbar() {
       setScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -40% 0px" }
+    );
+
+    const sections = ["about", "skills", "experience", "projects", "contact"];
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   useEffect(() => {
@@ -119,7 +141,11 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm text-gray-300 hover:text-primary transition-colors hover:scale-105"
+              className={`text-sm transition-colors hover:scale-105 ${
+                activeSection === link.href.substring(1)
+                  ? "text-primary font-semibold"
+                  : "text-gray-300 hover:text-primary"
+              }`}
             >
               {link.name}
             </Link>
@@ -160,7 +186,11 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-2xl font-display text-white hover:text-primary transition-colors"
+                    className={`text-2xl font-display transition-colors ${
+                      activeSection === link.href.substring(1)
+                        ? "text-primary font-bold"
+                        : "text-white hover:text-primary"
+                    }`}
                   >
                     {link.name}
                   </Link>

@@ -107,7 +107,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth dark">
       <body
-        className={`${inter.variable} ${spaceGrotesk.variable} font-sans bg-background text-foreground antialiased min-h-screen selection:bg-primary/30 selection:text-white`}
+        suppressHydrationWarning
+        className={`${inter.variable} ${spaceGrotesk.variable} font-sans bg-background text-foreground antialiased min-h-screen overflow-x-hidden w-full selection:bg-primary/30 selection:text-white`}
       >
         {children}
       </body>

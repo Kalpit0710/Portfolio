@@ -3,13 +3,13 @@ const experiences = [
     role: "Associate Software Engineer",
     company: "MAQ Software",
     timeline: "Since November 2025",
-    description: "Develop web-based enterprise solutions for global clients using C# .NET and ReactJS, contributing to production-ready feature delivery. Collaborate with cross-functional teams to convert requirements into scalable solutions, gain hands-on experience with Microsoft Azure Portal services, and support deployment and workflow management using Azure DevOps. Additionally, worked with Power BI to understand data visualization and reporting for business insights."
+    description: "I develop web-based enterprise solutions for global clients using C# .NET and ReactJS, contributing to production-ready feature delivery. I collaborate with cross-functional teams to convert requirements into scalable solutions, gaining hands-on experience with Microsoft Azure Portal services. I also manage deployments using Azure DevOps and work with Power BI to generate actionable business insights through data visualization."
   },
   {
     role: "Chief Executive Officer",
     company: "Student Organization Wissen",
     timeline: "August 2023 – August 2025",
-    description: "As CEO of Wissen Organization, responsibilities include overseeing the strategic planning and on-ground execution of over 25 high-profile events at Lovely Professional University. These initiatives range from tech fests and coding championships to the prestigious 25th Annual NOSPlan Convention. The role demands meticulous coordination, operational excellence, and the delivery of impactful experiences across large-scale academic and professional platforms."
+    description: "I led the strategic planning and on-ground execution of over 25 high-profile events at Lovely Professional University. These initiatives ranged from massive tech fests and coding championships to the prestigious 25th Annual NOSPlan Convention. I successfully managed meticulous coordination, achieved operational excellence, and delivered impactful experiences across large-scale academic and professional platforms."
   }
 ];
 
