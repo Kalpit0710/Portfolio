@@ -59,11 +59,12 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Experience", href: "#experience" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", href: "/#about" },
+    { name: "Skills", href: "/#skills" },
+    { name: "Experience", href: "/#experience" },
+    { name: "Projects", href: "/#projects" },
+    { name: "Contact", href: "/#contact" },
+    { name: "Updates", href: "/updates" },
   ];
 
   const openResumeModal = () => {
@@ -142,7 +143,7 @@ export default function Navbar() {
               key={link.name}
               href={link.href}
               className={`text-sm transition-colors hover:scale-105 ${
-                activeSection === link.href.substring(1)
+                activeSection === (link.href.split('#')[1] || link.href.substring(1))
                   ? "text-primary font-semibold"
                   : "text-gray-300 hover:text-primary"
               }`}
@@ -187,7 +188,7 @@ export default function Navbar() {
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className={`text-2xl font-display transition-colors ${
-                      activeSection === link.href.substring(1)
+                      activeSection === (link.href.split('#')[1] || link.href.substring(1))
                         ? "text-primary font-bold"
                         : "text-white hover:text-primary"
                     }`}
